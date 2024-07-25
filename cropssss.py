@@ -309,15 +309,22 @@ feature2 = st.number_input('Feature 2')
 feature3 = st.number_input('Feature 3')
 feature4 = st.number_input('Feature 4')
 feature5 = st.number_input('Feature 5')
+feature6 = st.number_input('Feature 6')
+feature7 = st.number_input('Feature 7')
+
 
 # When the user clicks the 'Predict' button
 if st.button('Predict'):
-    features = np.array([[feature1, feature2, feature3, feature4, feature5]])
-    prediction = model.predict(features)
-    st.write(f'Recommended Crop: {prediction[0]}')
-
-
-# In[ ]:
+    features = np.array([[feature1, feature2, feature3, feature4, feature5, feature6, feature7]])
+    
+    # Log the features to ensure they are correct
+    st.write(f'Input features: {features}')
+    
+    try:
+        prediction = model.predict(features)
+        st.write(f'Recommended Crop: {prediction[0]}')
+    except ValueError as e:
+        st.write(f'Error: {e}')
 
 
 
