@@ -317,9 +317,9 @@ label_to_crop = {
     21: 'watermelon'
 }
 
-# Title of the app with color
+# Title of the app with larger, bolder text
 st.markdown(
-    "<h1 style='text-align: center; color: #4CAF50;'>Crop Recommendation System</h1>",
+    "<h1 style='text-align: center; font-size: 36px; font-weight: bold; color: #4CAF50;'>Crop Recommendation System</h1>",
     unsafe_allow_html=True
 )
 
@@ -342,7 +342,7 @@ if st.button('🔮 Predict my crop', key='predict'):
         prediction = model.predict(features)
         crop_name = label_to_crop.get(prediction[0], "Unknown crop")
         st.markdown(
-            f"<h2 style='text-align: center; color: #FF5722;'>Recommended Crop: {crop_name}</h2>",
+            f"<h2 style='text-align: center; font-size: 30px; font-weight: bold; color: #FF5722;'>Recommended Crop: {crop_name}</h2>",
             unsafe_allow_html=True
         )
 
