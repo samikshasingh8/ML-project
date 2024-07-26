@@ -321,8 +321,6 @@ label_to_crop = {
 st.title('Crop Recommendation System')
 
 # Collecting user inputs
-st.header('Input Features')
-
 N = st.number_input('Nitrogen content (N)', min_value=0, max_value=100, value=50)
 P = st.number_input('Phosphorus content (P)', min_value=0, max_value=100, value=50)
 K = st.number_input('Potassium content (K)', min_value=0, max_value=100, value=50)
@@ -331,33 +329,14 @@ humidity = st.number_input('Humidity (%)', min_value=0, max_value=100, value=50)
 rainfall = st.number_input('Rainfall (mm)', min_value=0, max_value=500, value=250)
 temperature = st.number_input('Temperature (°C)', min_value=-10, max_value=50, value=25)
 
-# Main panel for displaying results
-st.subheader('Entered Features')
-st.write(f'N: {N}')
-st.write(f'P: {P}')
-st.write(f'K: {K}')
-st.write(f'pH: {pH}')
-st.write(f'Humidity: {humidity}')
-st.write(f'Rainfall: {rainfall}')
-st.write(f'Temperature: {temperature}')
-
 # Predict button
 if st.button('Predict my crop'):
     features = np.array([[N, P, K, temperature, humidity, pH, rainfall]])
-
-    # Log the features to ensure they are correct
-    st.write(f'Input features: {features}')
 
     try:
         prediction = model.predict(features)
         crop_name = label_to_crop.get(prediction[0], "Unknown crop")
         st.subheader(f'Recommended Crop: {crop_name}')
 
-        # Display additional information about the recommended crop
-        if crop_name != "Unknown crop":
-            st.write(f"**About {crop_name}:**")
-            st.write("Here you can add more information about the recommended crop, such as ideal growing conditions, common pests, and market value.")
-
     except ValueError as e:
         st.error(f'Error: {e}')
-
