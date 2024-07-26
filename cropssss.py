@@ -292,7 +292,6 @@ joblib.dump(best_model, 'crop_recommendation_model.joblib')
 
 # In[50]:
 
-
 import streamlit as st
 import joblib
 import numpy as np
@@ -300,32 +299,46 @@ import numpy as np
 # Load the trained model
 model = joblib.load('crop_recommendation_model.joblib')
 
-# Define the app
+# Title of the app
 st.title('Crop Recommendation System')
 
-# Define input fields for the 5 features (assuming the features are named as feature1, feature2, etc.)
-feature1 = st.number_input('N')
-feature2 = st.number_input('P')
-feature3 = st.number_input('K')
-feature4 = st.number_input('temperature')
-feature5 = st.number_input('humidity')
-feature6 = st.number_input('pH')
-feature7 = st.number_input('rainfall')
+# Sidebar for user inputs
+st.sidebar.header('Input Features')
 
+# Collecting user inputs
+N = st.sidebar.slider('Nitrogen content (N)', 0, 100, 50)
+P = st.sidebar.slider('Phosphorus content (P)', 0, 100, 50)
+K = st.sidebar.slider('Potassium content (K)', 0, 100, 50)
+pH = st.sidebar.slider('pH of soil', 1.0, 14.0, 7.0)
+humidity = st.sidebar.slider('Humidity (%)', 0, 100, 50)
+rainfall = st.sidebar.slider('Rainfall (mm)', 0, 500, 250)
+temperature = st.sidebar.slider('Temperature (°C)', -10, 50, 25)
 
-# When the user clicks the 'Predict' button
+# Main panel for displaying results
+st.subheader('Input Features')
+st.write(f'N: {N}')
+st.write(f'P: {P}')
+st.write(f'K: {K}')
+st.write(f'pH: {pH}')
+st.write(f'Humidity: {humidity}')
+st.write(f'Rainfall: {rainfall}')
+st.write(f'Temperature: {temperature}')
+
+# Predict button
 if st.button('Predict my crop'):
     features = np.array([[N, P, K, temperature, humidity, pH, rainfall]])
-    
+
     # Log the features to ensure they are correct
     st.write(f'Input features: {features}')
-    
+
     try:
         prediction = model.predict(features)
-        st.write(f'Recommended Crop: {prediction[0]}')
+        st.subheader(f'Recommended Crop: {prediction[0]}')
     except ValueError as e:
-        st.write(f'Error: {e}')
+        st.error(f'Error: {e}')
 
+
+    
 
 
 
