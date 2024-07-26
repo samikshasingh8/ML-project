@@ -317,26 +317,34 @@ label_to_crop = {
     21: 'watermelon'
 }
 
-# Title of the app
-st.title('Crop Recommendation System')
+# Title of the app with color
+st.markdown(
+    "<h1 style='text-align: center; color: #4CAF50;'>Crop Recommendation System</h1>",
+    unsafe_allow_html=True
+)
 
-# Collecting user inputs
-N = st.number_input('Nitrogen content (N)', min_value=0, max_value=100, value=50)
-P = st.number_input('Phosphorus content (P)', min_value=0, max_value=100, value=50)
-K = st.number_input('Potassium content (K)', min_value=0, max_value=100, value=50)
-pH = st.number_input('pH of soil', min_value=1.0, max_value=14.0, value=7.0)
-humidity = st.number_input('Humidity (%)', min_value=0, max_value=100, value=50)
-rainfall = st.number_input('Rainfall (mm)', min_value=0, max_value=500, value=250)
-temperature = st.number_input('Temperature (°C)', min_value=-10, max_value=50, value=25)
+# Collecting user inputs with icons and colors
+st.markdown("<h2 style='color: #2196F3;'>Enter the features below:</h2>", unsafe_allow_html=True)
 
-# Predict button
-if st.button('Predict my crop'):
+N = st.number_input('🌿 Nitrogen content (N)', min_value=0, max_value=100, value=50, step=1)
+P = st.number_input('🌾 Phosphorus content (P)', min_value=0, max_value=100, value=50, step=1)
+K = st.number_input('🌱 Potassium content (K)', min_value=0, max_value=100, value=50, step=1)
+pH = st.number_input('🧪 pH of soil', min_value=1.0, max_value=14.0, value=7.0, step=0.1)
+humidity = st.number_input('💧 Humidity (%)', min_value=0, max_value=100, value=50, step=1)
+rainfall = st.number_input('🌧️ Rainfall (mm)', min_value=0, max_value=500, value=250, step=1)
+temperature = st.number_input('🌡️ Temperature (°C)', min_value=-10, max_value=50, value=25, step=1)
+
+# Predict button with color
+if st.button('🔮 Predict my crop', key='predict'):
     features = np.array([[N, P, K, temperature, humidity, pH, rainfall]])
 
     try:
         prediction = model.predict(features)
         crop_name = label_to_crop.get(prediction[0], "Unknown crop")
-        st.subheader(f'Recommended Crop: {crop_name}')
+        st.markdown(
+            f"<h2 style='text-align: center; color: #FF5722;'>Recommended Crop: {crop_name}</h2>",
+            unsafe_allow_html=True
+        )
 
     except ValueError as e:
         st.error(f'Error: {e}')
