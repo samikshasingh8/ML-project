@@ -314,7 +314,7 @@ feature7 = st.number_input('rainfall')
 
 
 # When the user clicks the 'Predict' button
-if st.button('Predict'):
+if st.button('Predict my crop'):
     features = np.array([[N, P, K, temperature, humidity, pH, rainfall]])
     
     # Log the features to ensure they are correct
