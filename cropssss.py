@@ -284,14 +284,6 @@ print(X.shape)  # Should output (number_of_samples, 5)
 # In[48]:
 
 
-import joblib
-
-# Assuming `model` is your trained machine learning model
-joblib.dump(best_model, 'crop_recommendation_model.joblib')
-
-
-# In[50]:
-
 import streamlit as st
 import joblib
 import numpy as np
@@ -299,23 +291,31 @@ import numpy as np
 # Load the trained model
 model = joblib.load('crop_recommendation_model.joblib')
 
+# Dictionary for label-to-crop mapping
+label_to_crop = {
+    0: 'Rice',
+    1: 'Wheat',
+    2: 'Corn',
+    # Add all crop labels and names here
+    21: 'Tomato'
+}
+
 # Title of the app
 st.title('Crop Recommendation System')
 
-# Sidebar for user inputs
-st.sidebar.header('Input Features')
-
 # Collecting user inputs
-N = st.sidebar.slider('Nitrogen content (N)', 0, 100, 50)
-P = st.sidebar.slider('Phosphorus content (P)', 0, 100, 50)
-K = st.sidebar.slider('Potassium content (K)', 0, 100, 50)
-pH = st.sidebar.slider('pH of soil', 1.0, 14.0, 7.0)
-humidity = st.sidebar.slider('Humidity (%)', 0, 100, 50)
-rainfall = st.sidebar.slider('Rainfall (mm)', 0, 500, 250)
-temperature = st.sidebar.slider('Temperature (°C)', -10, 50, 25)
+st.header('Input Features')
+
+N = st.number_input('Nitrogen content (N)', min_value=0, max_value=100, value=50)
+P = st.number_input('Phosphorus content (P)', min_value=0, max_value=100, value=50)
+K = st.number_input('Potassium content (K)', min_value=0, max_value=100, value=50)
+pH = st.number_input('pH of soil', min_value=1.0, max_value=14.0, value=7.0)
+humidity = st.number_input('Humidity (%)', min_value=0, max_value=100, value=50)
+rainfall = st.number_input('Rainfall (mm)', min_value=0, max_value=500, value=250)
+temperature = st.number_input('Temperature (°C)', min_value=-10, max_value=50, value=25)
 
 # Main panel for displaying results
-st.subheader('Input Features')
+st.subheader('Entered Features')
 st.write(f'N: {N}')
 st.write(f'P: {P}')
 st.write(f'K: {K}')
@@ -333,9 +333,22 @@ if st.button('Predict my crop'):
 
     try:
         prediction = model.predict(features)
-        st.subheader(f'Recommended Crop: {prediction[0]}')
+        crop_name = label_to_crop.get(prediction[0], "Unknown crop")
+        st.subheader(f'Recommended Crop: {crop_name}')
+
+        # Display additional information about the recommended crop
+        if crop_name != "Unknown crop":
+            st.write(f"**About {crop_name}:**")
+            st.write("Here you can add more information about the recommended crop, such as ideal growing conditions, common pests, and market value.")
+
     except ValueError as e:
         st.error(f'Error: {e}')
+
+# Add more interactivity
+st.subheader('Additional Information')
+st.write("Enter the features above to get a crop recommendation. The app uses a machine learning model to predict the best crop based on the provided soil and weather conditions.")
+st.write("Make sure to input realistic values to get the most accurate recommendation.")
+
 
 
     
