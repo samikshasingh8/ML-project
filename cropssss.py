@@ -304,18 +304,18 @@ model = joblib.load('crop_recommendation_model.joblib')
 st.title('Crop Recommendation System')
 
 # Define input fields for the 5 features (assuming the features are named as feature1, feature2, etc.)
-feature1 = st.number_input('Feature 1')
-feature2 = st.number_input('Feature 2')
-feature3 = st.number_input('Feature 3')
-feature4 = st.number_input('Feature 4')
-feature5 = st.number_input('Feature 5')
-feature6 = st.number_input('Feature 6')
-feature7 = st.number_input('Feature 7')
+feature1 = st.number_input('N')
+feature2 = st.number_input('P')
+feature3 = st.number_input('K')
+feature4 = st.number_input('temperature')
+feature5 = st.number_input('humidity')
+feature6 = st.number_input('pH')
+feature7 = st.number_input('rainfall')
 
 
 # When the user clicks the 'Predict' button
 if st.button('Predict'):
-    features = np.array([[feature1, feature2, feature3, feature4, feature5, feature6, feature7]])
+    features = np.array([[N, P, K, temperature, humidity, pH, rainfall]])
     
     # Log the features to ensure they are correct
     st.write(f'Input features: {features}')
