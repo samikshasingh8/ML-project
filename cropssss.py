@@ -361,7 +361,3 @@ if st.button('Predict my crop'):
     except ValueError as e:
         st.error(f'Error: {e}')
 
-# Add more interactivity
-st.subheader('Additional Information')
-st.write("Enter the features above to get a crop recommendation. The app uses a machine learning model to predict the best crop based on the provided soil and weather conditions.")
-st.write("Make sure to input realistic values to get the most accurate recommendation.")
