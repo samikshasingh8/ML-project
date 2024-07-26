@@ -293,11 +293,28 @@ model = joblib.load('crop_recommendation_model.joblib')
 
 # Dictionary for label-to-crop mapping
 label_to_crop = {
-    0: 'Rice',
-    1: 'Wheat',
-    2: 'Corn',
-    # Add all crop labels and names here
-    21: 'Tomato'
+    0: 'apple',
+    1: 'banana',
+    2: 'blackgram',
+    3: 'chickpea',
+    4: 'coconut',
+    5: 'coffee',
+    6: 'cotton',
+    7: 'grapes',
+    8: 'jute',
+    9: 'kidneybeans',
+    10: 'lentil',
+    11: 'maize',
+    12: 'mango',
+    13: 'mothbeans',
+    14: 'mungbean',
+    15: 'muskmelon',
+    16: 'orange',
+    17: 'papaya',
+    18: 'pigeonpeas',
+    19: 'pomegranate',
+    20: 'rice',
+    21: 'watermelon'
 }
 
 # Title of the app
@@ -348,10 +365,3 @@ if st.button('Predict my crop'):
 st.subheader('Additional Information')
 st.write("Enter the features above to get a crop recommendation. The app uses a machine learning model to predict the best crop based on the provided soil and weather conditions.")
 st.write("Make sure to input realistic values to get the most accurate recommendation.")
-
-
-
-    
-
-
-
