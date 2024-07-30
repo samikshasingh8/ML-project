@@ -4,4 +4,5 @@ scikit-learn
 streamlit
 joblib
 imbalanced-learn
-tensorflow
+tensorflow==2.11.0
+
