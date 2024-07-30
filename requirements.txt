@@ -4,4 +4,4 @@ scikit-learn
 streamlit
 joblib
 imbalanced-learn
-
+tensorflow
