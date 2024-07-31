@@ -33,5 +33,6 @@ Sustainability: Encourages sustainable farming practices by promoting crops that
 
 # Dataset
 The dataset used for this project includes balanced data on various crops and their respective soil and environmental conditions. The features and corresponding labels (22 different types of crops) are meticulously curated to ensure the model's robustness and accuracy.
+
 # Conclusion
 The Crop Recommendation System is a significant step forward in integrating technology with agriculture. By leveraging machine learning, this system provides farmers with data-driven insights to select the most suitable crops for their specific conditions. With an accuracy of 97.5%, it offers reliable recommendations that can enhance productivity, ensure resource efficiency, and promote sustainable farming practices. As we continue to refine and expand this system, we hope to make a lasting positive impact on the agricultural sector, empowering farmers with the tools they need to make informed decisions and achieve better yields. Thank you for your interest in our project, and we look forward to your feedback and contributions.
